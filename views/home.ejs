@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>MediMantra</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+	<link rel="stylesheet" href="style.css">
+	<script src="https://kit.fontawesome.com/64a450bfe1.js" crossorigin="anonymous"></script>
+
+
+
+</head>
+
+<body>
+
+	<div class="header">
+		<nav class="navbar navbar-expand-custom navbar-mainbg">
+			<a class="navbar-brand navbar-logo" href="#">मेडिMantra</a>
+			<button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<i class="fas fa-bars text-white"></i>
+			</button>
+			<div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+				<ul class="navbar-nav ml-auto">
+					<div class="hori-selector">
+						<div class="left"></div>
+						<div class="right"></div>
+					</div>
+					<li class="active nav-item">
+						<a class="nav-link"
+							href="file:///C:/Users/nilay/OneDrive/Desktop/MediMantra/LandingPage.html#"><i
+								class="fa-sharp fa-solid fa-notes-medical"></i>Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="javascript:void(0);"><i
+								class="fa-sharp fa-solid fa-notes-medical"></i>Dashboard</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="javascript:void(0);"><i class="fa fa-address-book"></i>Appointment</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="javascript:void(0);"><i
+								class="fa-solid fa-kit-medical"></i>emergency</a>
+					</li>
+					<li>
+					<li class="nav-item">
+						<a class="nav-link " href="javascript:void(0);"><i class="fa fa-user"></i></a>
+					</li>
+					</li>
+
+
+
+				</ul>
+			</div>
+		</nav>
+	</div>
+
+	<div class="carousel">
+		<!-- Carousel items go here -->
+		<div style="background-color: red;" class="carousel-item active" id="emergency">
+			<h2>Emergency Services</h2>
+			<p>Information about emergency ambulance systems.</p>
+		</div>
+		<div style="background-color: blue;" class="carousel-item" id="appointment">
+			<h2>Book an Appointment</h2>
+			<p>Online appointment booking to save your time.</p>
+		</div>
+		<div style="background-color: green;" class="carousel-item" id="fitness">
+			<h2>Fitness Tips</h2>
+			<p>Tips and advice on how to stay fit and healthy.</p>
+		</div>
+
+		<!-- Pagination dots -->
+		<div class="pagination-dots">
+			<span class="dot active" onclick="currentSlide(0)"></span>
+			<span class="dot" onclick="currentSlide(1)"></span>
+			<span class="dot" onclick="currentSlide(2)"></span>
+		</div>
+	</div>
+
+
+
+	<script>
+		let slideIndex = 0;
+		showSlide(slideIndex);
+
+		// Automatically change slides every 5 seconds
+		setInterval(() => {
+			slideIndex++;
+			if (slideIndex >= document.getElementsByClassName("carousel-item").length) {
+				slideIndex = 0;
+			}
+			showSlide(slideIndex);
+		}, 5000);
+
+		function currentSlide(n) {
+			showSlide(slideIndex = n);
+		}
+
+		function showSlide(n) {
+			let slides = document.getElementsByClassName("carousel-item");
+			let dots = document.getElementsByClassName("dot");
+			if (n >= slides.length) { slideIndex = 0 }
+			if (n < 0) { slideIndex = slides.length - 1 }
+			for (let i = 0; i < slides.length; i++) {
+				slides[i].classList.remove("active");
+				dots[i].classList.remove("active");
+			}
+			slides[slideIndex].classList.add("active");
+			dots[slideIndex].classList.add("active");
+		}
+		// ---------Responsive-navbar-active-animation-----------
+		function test() {
+			var tabsNewAnim = $('#navbarSupportedContent');
+			var selectorNewAnim = $('#navbarSupportedContent').find('li').length;
+			var activeItemNewAnim = tabsNewAnim.find('.active');
+			var activeWidthNewAnimHeight = activeItemNewAnim.innerHeight();
+			var activeWidthNewAnimWidth = activeItemNewAnim.innerWidth();
+			var itemPosNewAnimTop = activeItemNewAnim.position();
+			var itemPosNewAnimLeft = activeItemNewAnim.position();
+			$(".hori-selector").css({
+				"top": itemPosNewAnimTop.top + "px",
+				"left": itemPosNewAnimLeft.left + "px",
+				"height": activeWidthNewAnimHeight + "px",
+				"width": activeWidthNewAnimWidth + "px"
+			});
+			$("#navbarSupportedContent").on("click", "li", function (e) {
+				$('#navbarSupportedContent ul li').removeClass("active");
+				$(this).addClass('active');
+				var activeWidthNewAnimHeight = $(this).innerHeight();
+				var activeWidthNewAnimWidth = $(this).innerWidth();
+				var itemPosNewAnimTop = $(this).position();
+				var itemPosNewAnimLeft = $(this).position();
+				$(".hori-selector").css({
+					"top": itemPosNewAnimTop.top + "px",
+					"left": itemPosNewAnimLeft.left + "px",
+					"height": activeWidthNewAnimHeight + "px",
+					"width": activeWidthNewAnimWidth + "px"
+				});
+			});
+		}
+		$(document).ready(function () {
+			setTimeout(function () { test(); });
+		});
+		$(window).on('resize', function () {
+			setTimeout(function () { test(); }, 500);
+		});
+		$(".navbar-toggler").click(function () {
+			$(".navbar-collapse").slideToggle(300);
+			setTimeout(function () { test(); });
+		});
+
+
+
+		// --------------add active class-on another-page move----------
+		jQuery(document).ready(function ($) {
+			// Get current path and find target link
+			var path = window.location.pathname.split("/").pop();
+
+			// Account for home page with empty path
+			if (path == '') {
+				path = 'index.html';
+			}
+
+			var target = $('#navbarSupportedContent ul li a[href="' + path + '"]');
+			// Add active class to target link
+			target.parent().addClass('active');
+		});
+
+
+
+
+		function test() {
+			var tabsNewAnim = $('#navbarSupportedContent');
+			var selectorNewAnim = $('#navbarSupportedContent').find('li').length;
+			var activeItemNewAnim = tabsNewAnim.find('.active');
+			var activeWidthNewAnimHeight = activeItemNewAnim.innerHeight();
+			var activeWidthNewAnimWidth = activeItemNewAnim.innerWidth();
+			var itemPosNewAnimTop = activeItemNewAnim.position();
+			var itemPosNewAnimLeft = activeItemNewAnim.position();
+			$(".hori-selector").css({
+				"top": itemPosNewAnimTop.top + "px",
+				"left": itemPosNewAnimLeft.left + "px",
+				"height": activeWidthNewAnimHeight + "px",
+				"width": activeWidthNewAnimWidth + "px"
+			});
+			$("#navbarSupportedContent").on("click", "li", function (e) {
+				$('#navbarSupportedContent ul li').removeClass("active");
+				$(this).addClass('active');
+				var activeWidthNewAnimHeight = $(this).innerHeight();
+				var activeWidthNewAnimWidth = $(this).innerWidth();
+				var itemPosNewAnimTop = $(this).position();
+				var itemPosNewAnimLeft = $(this).position();
+				$(".hori-selector").css({
+					"top": itemPosNewAnimTop.top + "px",
+					"left": itemPosNewAnimLeft.left + "px",
+					"height": activeWidthNewAnimHeight + "px",
+					"width": activeWidthNewAnimWidth + "px"
+				});
+			});
+		}
+		$(document).ready(function () {
+			setTimeout(function () { test(); });
+		});
+		$(window).on('resize', function () {
+			setTimeout(function () { test(); }, 500);
+		});
+		$(".navbar-toggler").click(function () {
+			$(".navbar-collapse").slideToggle(300);
+			setTimeout(function () { test(); });
+		});
+
+
+
+		// --------------add active class-on another-page move----------
+		jQuery(document).ready(function ($) {
+			// Get current path and find target link
+			var path = window.location.pathname.split("/").pop();
+
+			// Account for home page with empty path
+			if (path == '') {
+				path = 'LandingPage.html';
+			}
+
+			var target = $('#navbarSupportedContent ul li a[href="' + path + '"]');
+			// Add active class to target link
+			target.parent().addClass('active');
+		});
+	</script>
+
+</body>
+
+</html>

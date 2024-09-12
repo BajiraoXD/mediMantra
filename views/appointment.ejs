@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Appointment Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+    <!-- Add your CSS links here -->
+    <style>
+        body {
+            background-color: #0ccf2d;
+            font-family: "Ubuntu";
+        }
+
+        table {
+            border: white solid 2px;
+            margin-left: 38%;
+
+            float: left;
+        }
+
+        .gg {
+            border-radius: 100%;
+            background-color: blanchedalmond;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+
+        <div class="gg col-md-12 text-center p-3 py-5">
+            <div class="col-md-12 text-center p-3 py-5">
+                <H1>Get an Appointment!!!!</H1>
+            </div>
+            <h2>Available doctors</h2>
+
+            <img class="app-img" src="\images\doc-dashboard-blog.png" alt="app">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="2">Doctor Name</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <% doctors.forEach(doctor=> { %>
+                        <tr>
+                            <td style="color: #0ccf2d;">
+                                Dr. <%= doctor.name %>
+                            </td>
+                            <td>
+                                <button style="color: #0ccf2d;" class="btn btn-outline-light btn-sm book-button"
+                                    onclick="confirmAppointment('<%= doctor._id %>')">Book Appointment</button>
+                            </td>
+                        </tr>
+                        <% }); %>
+                </tbody>
+            </table>
+            <div class="col-md-12 text-center p-3 py-5">
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div id="successMessage" style="display: none;">
+        <!-- This div will display the success message after booking -->
+        Appointment successfully booked!
+    </div>
+
+    <script>
+        // JavaScript function to handle the button click event
+        function confirmAppointment(doctorId) {
+            // Display confirmation box
+            if (confirm("Are you sure you want to book an appointment with this doctor?")) {
+                // If user confirms, send a request to the server to book the appointment
+                bookAppointment(doctorId);
+            }
+        }
+
+        // Function to send a request to book the appointment
+        async function bookAppointment(doctorId) {
+            try {
+                // Send a POST request to the server to book the appointment
+                const response = await fetch("/book-appointment", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ doctorId })
+                });
+
+                // Check if the request was successful
+                if (response.ok) {
+                    // Display success message
+                    alert("Appointment successfully booked!");
+                    // Reload the page to update the appointments list
+                    location.reload();
+                } else {
+                    // Display error message
+                    alert("Failed to book appointment. Please try again later.");
+                }
+            } catch (error) {
+                console.error("Error booking appointment:", error);
+                alert("An error occurred while booking appointment. Please try again later.");
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>

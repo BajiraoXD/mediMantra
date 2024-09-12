@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Appointment Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+    <!-- Add your CSS links here -->
+    <style>
+        body {
+            background-color: #0ccf2d;
+            font-family: "Ubuntu";
+        }
+
+        table {
+            border: white solid 5px;
+            margin-left: 45%;
+
+            float: left;
+        }
+
+        .gg {
+
+            background-color: blanchedalmond;
+            width: 60%;
+            margin-top: 100px;
+            margin-left: 280px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+
+        <div class="gg col-md-12 text-center p-3 py-5">
+            <div class="col-md-12 text-center p-3 py-5">
+                <H1>You got a patient.</H1>
+            </div>
+            <h2>Your patient</h2>
+
+            <img height="150px" class="app-img" src="\images\doctor.png" alt="app">
+
+            <table>
+
+                <tr>
+                    <td>Name:</td>
+                    <td>
+                        <% names.forEach(name=> { %>
+
+                            <%= name %>
+
+                                <% }); %>
+                    </td>
+
+                </tr>
+
+
+            </table>
+            <div class="col-md-12 text-center p-3 py-5">
+
+            </div>
+        </div>
+
+    </div>
