@@ -11,95 +11,75 @@
     <style>
         body {
             background-color: #0ccf2d;
-            font-family: "Ubuntu";
+            font-family: 'Ubuntu', sans-serif;
         }
 
-        .gg {
-            border-radius: 100%;
-            background-color: blanchedalmond;
-        }
-
-        .app-img {
+        .profile-img {
             width: 100%;
             max-width: 300px;
             height: auto;
-            margin-top: 20px;
         }
 
         table {
             border: white solid 2px;
-            width: 100%;
-            max-width: 600px;
-            margin: 20px auto;
+        }
+
+        .book-button {
+            color: #0ccf2d;
         }
 
         @media (max-width: 768px) {
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            h2 {
-                font-size: 1.4rem;
-            }
-
-            .app-img {
+            .profile-img {
                 max-width: 200px;
+                margin-bottom: 20px;
             }
 
-            .book-button {
-                font-size: 0.9rem;
-            }
-        }
-
-        @media (max-width: 576px) {
-            h1 {
-                font-size: 1.5rem;
-            }
-
-            h2 {
-                font-size: 1.2rem;
-            }
-
-            .book-button {
-                font-size: 0.8rem;
+            table {
+                width: 100%;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="container text-center p-3 py-5">
-        <div class="col-12 p-3 py-5 gg">
-            <h1>Get an Appointment!!!!</h1>
-            <h2>Available Doctors</h2>
-            <img class="app-img" src="/images/doc-dashboard-blog.png" alt="app">
-            
-            <!-- Doctor's Table -->
-            <div class="table-responsive">
-                <table class="table table-bordered text-center">
-                    <thead>
-                        <tr>
-                            <th>Doctor Name</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% doctors.forEach(doctor => { %>
-                        <tr>
-                            <td style="color: #0ccf2d;">Dr. <%= doctor.name %></td>
-                            <td>
-                                <button class="btn btn-outline-light btn-sm book-button"
-                                    onclick="confirmAppointment('<%= doctor._id %>')">Book Appointment</button>
-                            </td>
-                        </tr>
-                        <% }); %>
-                    </tbody>
-                </table>
+    <div class="container mt-5 mb-5">
+        <div class="row align-items-center">
+            <!-- Left Side: Image -->
+            <div class="col-md-4 col-sm-12 text-center mb-4 mb-md-0">
+                <img class="profile-img" src="/images/doc-dashboard-blog.png" alt="Appointment">
             </div>
 
-            <div id="successMessage" style="display: none;">
-                Appointment successfully booked!
+            <!-- Right Side: Table -->
+            <div class="col-md-8 col-sm-12">
+                <h2 class="text-center">Available Doctors</h2>
+
+                <!-- Doctor's Table -->
+                <div class="table-responsive">
+                    <table class="table table-bordered text-center">
+                        <thead>
+                            <tr>
+                                <th>Doctor Name</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% doctors.forEach(doctor => { %>
+                            <tr>
+                                <td style="color: #0ccf2d;">Dr. <%= doctor.name %></td>
+                                <td>
+                                    <button class="btn btn-outline-light btn-sm book-button"
+                                        onclick="confirmAppointment('<%= doctor._id %>')">Book Appointment</button>
+                                </td>
+                            </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+        </div>
+
+        <div id="successMessage" style="display: none;" class="text-center mt-4">
+            Appointment successfully booked!
         </div>
     </div>
 
