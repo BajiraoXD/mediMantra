@@ -11,43 +11,57 @@
     <style>
         body {
             background-color: #0ccf2d;
-            font-family: "Ubuntu", sans-serif;
+            font-family: "Ubuntu";
         }
 
-        .app-img {
-            width: 100%;
-            max-width: 400px;
+        .appointment-header {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .doctor-card {
+            margin: 15px;
+            padding: 20px;
+            border-radius: 1rem;
+            background-color: #fff;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            flex: 1 0 21%; /* 4 cards per row */
+        }
+
+        .doctor-img {
+            max-width: 100%;
             height: auto;
-            margin-bottom: 20px;
+            border-radius: 8px;
         }
 
-        table {
-            width: 100%;
-            max-width: 600px;
-            border: white solid 2px;
+        .price {
+            font-size: 1.5rem;
+            margin: 10px 0;
         }
 
-        .container {
-            padding-top: 50px;
+        .btn {
+            background-color: #0ccf2d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            opacity: 0.8;
         }
 
         @media (max-width: 768px) {
-            .app-img {
-                max-width: 300px;
-            }
-
-            table {
-                width: 100%;
+            .doctor-card {
+                flex: 1 0 46%; /* 2 cards per row on smaller screens */
             }
         }
 
         @media (max-width: 576px) {
-            .app-img {
-                max-width: 250px;
-            }
-
-            table {
-                font-size: 0.9rem;
+            .doctor-card {
+                flex: 1 0 100%; /* 1 card per row on very small screens */
             }
         }
     </style>
@@ -55,54 +69,47 @@
 
 <body>
     <div class="container">
-        <div class="row">
-            <!-- Left Column: Image -->
-            <div class="col-md-4 col-sm-12 text-center">
-                <img class="app-img" src="/images/doc-dashboard-blog.png" alt="Appointment Image">
+        <div class="gg col-md-12 text-center p-3 py-5">
+            <div class="appointment-header">
+                <h1>Get an Appointment!!!!</h1>
             </div>
+            <h2>Available Doctors</h2>
 
-            <!-- Right Column: Table -->
-            <div class="col-md-8 col-sm-12">
-                <h2 class="text-center">Available Doctors</h2>
-                <div class="table-responsive">
-                    <table class="table table-bordered text-center">
-                        <thead>
-                            <tr>
-                                <th>Doctor Name</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% doctors.forEach(doctor => { %>
-                            <tr>
-                                <td style="color: #0ccf2d;">Dr. <%= doctor.name %></td>
-                                <td>
-                                    <button class="btn btn-outline-light btn-sm book-button"
-                                        onclick="confirmAppointment('<%= doctor._id %>')">Book Appointment</button>
-                                </td>
-                            </tr>
-                            <% }); %>
-                        </tbody>
-                    </table>
-                </div>
+            <div class="row">
+                <% doctors.forEach(doctor => { %>
+                    <div class="col-md-3">
+                        <div class="doctor-card">
+                            <img class="doctor-img" src="\images\doc-dashboard-blog.png" alt="app">
+                            <h5 style="color: #0ccf2d;">Dr. <%= doctor.name %></h5>
+                            <div class="price">Price: Rs. <%= Math.floor(Math.random() * (1000 - 500 + 1)) + 500 %></div>
+                            <button class="btn btn-outline-light btn-sm book-button"
+                                onclick="confirmAppointment('<%= doctor._id %>')">Book Appointment</button>
+                        </div>
+                    </div>
+                <% }); %>
             </div>
         </div>
     </div>
 
     <div id="successMessage" style="display: none;">
+        <!-- This div will display the success message after booking -->
         Appointment successfully booked!
     </div>
 
     <script>
         // JavaScript function to handle the button click event
         function confirmAppointment(doctorId) {
+            // Display confirmation box
             if (confirm("Are you sure you want to book an appointment with this doctor?")) {
+                // If user confirms, send a request to the server to book the appointment
                 bookAppointment(doctorId);
             }
         }
 
+        // Function to send a request to book the appointment
         async function bookAppointment(doctorId) {
             try {
+                // Send a POST request to the server to book the appointment
                 const response = await fetch("/book-appointment", {
                     method: "POST",
                     headers: {
@@ -111,10 +118,14 @@
                     body: JSON.stringify({ doctorId })
                 });
 
+                // Check if the request was successful
                 if (response.ok) {
+                    // Display success message
                     alert("Appointment successfully booked!");
+                    // Reload the page to update the appointments list
                     location.reload();
                 } else {
+                    // Display error message
                     alert("Failed to book appointment. Please try again later.");
                 }
             } catch (error) {
