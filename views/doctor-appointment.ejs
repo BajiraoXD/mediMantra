@@ -4,65 +4,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Appointment Page</title>
+    <title>Doctor's Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
-    <!-- Add your CSS links here -->
+    <script src="https://kit.fontawesome.com/64a450bfe1.js" crossorigin="anonymous"></script>
     <style>
         body {
-            background-color: #0ccf2d;
-            font-family: "Ubuntu";
+            background: rgb(7, 198, 202);
+            font-family: 'Ubuntu', sans-serif;
         }
 
-        table {
-            border: white solid 5px;
-            margin-left: 45%;
-
-            float: left;
+        .labels {
+            font-size: 11px;
         }
 
-        .gg {
+        .profile-img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+        }
 
-            background-color: blanchedalmond;
-            width: 60%;
-            margin-top: 100px;
-            margin-left: 280px;
+        .rounded-circle {
+            max-width: 150px;
+            height: auto;
+        }
 
+        @media (max-width: 768px) {
+            .rounded-circle {
+                width: 120px;
+            }
+
+            h4 {
+                font-size: 1.2rem;
+            }
+
+            .text-center {
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            h4 {
+                font-size: 1rem;
+            }
+
+            .profile-img {
+                max-width: 250px;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div>
-
-        <div class="gg col-md-12 text-center p-3 py-5">
-            <div class="col-md-12 text-center p-3 py-5">
-                <H1>You got a patient.</H1>
+    <div class="container rounded bg-white mt-5 mb-5 p-4">
+        <div class="row">
+            <div class="col-12 text-center p-3 py-5">
+                <h1>Doctor's Profile</h1>
             </div>
-            <h2>Your patient</h2>
 
-            <img height="150px" class="app-img" src="\images\doctor.png" alt="app">
-
-            <table>
-
-                <tr>
-                    <td>Name:</td>
-                    <td>
-                        <% names.forEach(name=> { %>
-
-                            <%= name %>
-
-                                <% }); %>
-                    </td>
-
-                </tr>
-
-
-            </table>
-            <div class="col-md-12 text-center p-3 py-5">
-
-            </div>
-        </div>
-
-    </div>
+            <!-- Doctor's Information -->
+            <div class="col-md-6 col-sm-12 text-c
