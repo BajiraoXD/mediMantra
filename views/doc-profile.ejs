@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doctor's Profile</title>
+    <title>Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
@@ -12,7 +12,6 @@
     <style>
         body {
             background: rgb(7, 198, 202);
-            font-family: 'Ubuntu', sans-serif;
         }
 
         .labels {
@@ -25,14 +24,14 @@
             height: auto;
         }
 
-        .rounded-circle {
-            max-width: 150px;
+        .doctor-img {
+            width: 150px; /* Adjusted for responsiveness */
             height: auto;
         }
 
         @media (max-width: 768px) {
-            .rounded-circle {
-                width: 120px;
+            .doctor-img {
+                width: 120px; /* Smaller image on medium screens */
             }
 
             h4 {
@@ -46,11 +45,7 @@
 
         @media (max-width: 576px) {
             h4 {
-                font-size: 1rem;
-            }
-
-            .profile-img {
-                max-width: 250px;
+                font-size: 1rem; /* Smaller text on small screens */
             }
         }
     </style>
@@ -64,4 +59,24 @@
             </div>
 
             <!-- Doctor's Information -->
-            <div class="col-md-6 col-sm-12 text-c
+            <div class="col-md-6 col-sm-12 text-center p-3 py-5">
+                <img class="rounded-circle doctor-img" src="/images/male-doc.png" alt="Doctor's Photo"><br>
+                <br>
+                <h4 class="font-weight-bold">Name: <%= name %></h4>
+                <h4 class="font-weight-bold">Email: <%= email %></h4>
+                <h4 class="font-weight-bold">Age: <%= age %></h4>
+                <h4 class="font-weight-bold">ID: <%= doctorId %></h4>
+            </div>
+
+            <!-- Doctor's Profile Image -->
+            <div class="col-md-6 col-sm-12 text-center p-3 py-5">
+                <img class="profile-img" src="/images/doc-dashboard-blog.png" alt="profile">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybihwIYH5F4G4U6o2FhwQ+Zm5r89O/yHG7F6v5d09y68Z9V5j" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-1Rzt1n8uE5XLgsAfZh1z5kwC2tZne0gESDLfO+g0W8uHlb/lPUQaL2XxUb6LssB0" crossorigin="anonymous"></script>
+</body>
+
+</html>
