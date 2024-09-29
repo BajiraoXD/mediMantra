@@ -10,71 +10,80 @@
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #0ccf2d;
-            font-family: "Ubuntu", sans-serif;
-        }
-
-        .container {
-            margin-top: 50px; /* Space from the top */
+            background-color: rgb(7, 198, 202);
+            font-family: "Ubuntu", sans-serif; /* Ensure proper font fallback */
         }
 
         .card {
-            margin: 20px; /* Space between cards */
+            width: 18rem; /* Adjust as needed */
+            margin: 20px; /* Spacing between cards */
         }
 
-        h1 {
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px; /* Add padding for aesthetics */
+        }
+
+        .book-button {
+            color: rgb(7, 198, 202);
+        }
+
+        h1,
+        h2 {
             text-align: center;
-            margin-bottom: 30px; /* Space below the title */
+            color: white; /* Change to suit your design */
         }
 
-        .app-img {
-            height: 150px; /* Height of the image */
-            display: block;
-            margin: 0 auto; /* Center the image */
+        /* Center the success message */
+        #successMessage {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            display: none; /* Hidden by default */
+            z-index: 1000; /* Ensure it appears above other content */
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <h1>Get an Appointment!</h1>
+        <h1>Get an Appointment!!!!</h1>
         <h2>Available Doctors</h2>
 
-        <img class="app-img" src="/images/doc-dashboard-blog.png" alt="app">
-
-        <div class="row">
+        <div class="container">
             <% doctors.forEach(doctor => { %>
-                <div class="col-md-4">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">Dr. <%= doctor.name %></h5>
-                            <p class="card-text">Price: ₹<%= Math.floor(Math.random() * (1000 - 500 + 1)) + 500 %></p>
-                            <button class="btn btn-primary" onclick="confirmAppointment('<%= doctor._id %>')">Book Appointment</button>
-                        </div>
+                <div class="card">
+                    <img src="<%= doctor.imageUrl %>" class="card-img-top" alt="<%= doctor.name %>">
+                    <div class="card-body">
+                        <h5 class="card-title">Dr. <%= doctor.name %></h5>
+                        <p class="card-text">Price: Rs. <%= Math.floor(Math.random() * (1000 - 500 + 1)) + 500 %></p>
+                        <button class="btn btn-outline-light book-button"
+                                onclick="confirmAppointment('<%= doctor._id %>')">Book Appointment</button>
                     </div>
                 </div>
             <% }); %>
         </div>
     </div>
 
-    <div id="successMessage" style="display: none;">
+    <div id="successMessage">
         Appointment successfully booked!
     </div>
 
     <script>
-        // JavaScript function to handle the button click event
         function confirmAppointment(doctorId) {
-            // Display confirmation box
             if (confirm("Are you sure you want to book an appointment with this doctor?")) {
-                // If user confirms, send a request to the server to book the appointment
                 bookAppointment(doctorId);
             }
         }
 
-        // Function to send a request to book the appointment
         async function bookAppointment(doctorId) {
             try {
-                // Send a POST request to the server to book the appointment
                 const response = await fetch("/book-appointment", {
                     method: "POST",
                     headers: {
@@ -83,20 +92,26 @@
                     body: JSON.stringify({ doctorId })
                 });
 
-                // Check if the request was successful
                 if (response.ok) {
-                    // Display success message
-                    alert("Appointment successfully booked!");
-                    // Reload the page to update the appointments list
-                    location.reload();
+                    showSuccessMessage(); // Show the success message
+                    setTimeout(() => {
+                        location.reload(); // Reload the page after 2 seconds
+                    }, 2000);
                 } else {
-                    // Display error message
                     alert("Failed to book appointment. Please try again later.");
                 }
             } catch (error) {
                 console.error("Error booking appointment:", error);
                 alert("An error occurred while booking appointment. Please try again later.");
             }
+        }
+
+        function showSuccessMessage() {
+            const messageDiv = document.getElementById('successMessage');
+            messageDiv.style.display = 'block'; // Show the success message
+            setTimeout(() => {
+                messageDiv.style.display = 'none'; // Hide after 2 seconds
+            }, 2000);
         }
     </script>
 </body>
