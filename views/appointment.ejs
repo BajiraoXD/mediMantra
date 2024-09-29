@@ -11,88 +11,187 @@
     <style>
         body {
             background-color: #0ccf2d;
-            font-family: 'Ubuntu', sans-serif;
+            font-family: "Ubuntu";
         }
 
-        .profile-img {
-            width: 100%;
-            max-width: 300px;
+        .appointment-header {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .doctor-table {
+            margin-left: 0;
+        }
+
+        .doctor-img {
+            max-width: 100%;
             height: auto;
+            border-radius: 8px;
         }
 
-        table {
-            border: white solid 2px;
+        .gg {
+            border-radius: 100%;
+            background-color: blanchedalmond;
+            padding: 20px;
         }
 
-        .book-button {
-            color: #0ccf2d;
+        .pricing-table {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
         }
 
-        @media (max-width: 768px) {
-            .profile-img {
-                max-width: 200px;
-                margin-bottom: 20px;
+        .card {
+            background: #fff;
+            border-radius: 1rem;
+            margin: 15px;
+            padding: 20px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 220px;
+        }
+
+        .type {
+            font-size: 1.5rem;
+            margin: 10px 0;
+        }
+
+        .price {
+            font-size: 2rem;
+            margin: 10px 0;
+        }
+
+        .btn {
+            background-color: #0ccf2d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 576px) {
+            .pricing-table {
+                flex-direction: column;
+                align-items: center;
             }
 
-            table {
-                width: 100%;
+            .card {
+                width: 90%;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="container mt-5 mb-5">
-        <div class="row align-items-center">
-            <!-- Left Side: Image -->
-            <div class="col-md-4 col-sm-12 text-center mb-4 mb-md-0">
-                <img class="profile-img" src="/images/doc-dashboard-blog.png" alt="Appointment">
+    <div class="container">
+        <div class="gg col-md-12 text-center p-3 py-5">
+            <div class="appointment-header">
+                <h1>Get an Appointment!!!!</h1>
             </div>
+            <h2>Available doctors</h2>
 
-            <!-- Right Side: Table -->
-            <div class="col-md-8 col-sm-12">
-                <h2 class="text-center">Available Doctors</h2>
-
-                <!-- Doctor's Table -->
-                <div class="table-responsive">
-                    <table class="table table-bordered text-center">
+            <div class="row align-items-center">
+                <div class="col-md-4">
+                    <img class="doctor-img" src="\images\doc-dashboard-blog.png" alt="app">
+                </div>
+                <div class="col-md-8">
+                    <table class="table doctor-table">
                         <thead>
                             <tr>
-                                <th>Doctor Name</th>
-                                <th>Action</th>
+                                <th scope="col">Doctor Name</th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
                             <% doctors.forEach(doctor => { %>
-                            <tr>
-                                <td style="color: #0ccf2d;">Dr. <%= doctor.name %></td>
-                                <td>
-                                    <button class="btn btn-outline-light btn-sm book-button"
-                                        onclick="confirmAppointment('<%= doctor._id %>')">Book Appointment</button>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td style="color: #0ccf2d;">
+                                        Dr. <%= doctor.name %>
+                                    </td>
+                                    <td>
+                                        <button style="color: #0ccf2d;" class="btn btn-outline-light btn-sm book-button"
+                                            onclick="confirmAppointment('<%= doctor._id %>')">Book Appointment</button>
+                                    </td>
+                                </tr>
                             <% }); %>
                         </tbody>
                     </table>
                 </div>
             </div>
-        </div>
 
-        <div id="successMessage" style="display: none;" class="text-center mt-4">
-            Appointment successfully booked!
+            <h2 class="mt-5">Pricing Plans</h2>
+            <section class="pricing-table">
+                <div class="card">
+                    <h6 class="type">Basic</h6>
+                    <div class="price">$20</div>
+                    <h5 class="plan">Plan</h5>
+                    <ul class="details">
+                        <li>FREE Stickers</li>
+                        <li>FREE Delivery</li>
+                        <li>24/7 support</li>
+                    </ul>
+                    <div class="buy-button">
+                        <h3 class="btn">Subscribe</h3>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h6 class="type">Awesome</h6>
+                    <div class="price">$50</div>
+                    <h5 class="plan">Plan</h5>
+                    <ul class="details">
+                        <li>FREE Stickers</li>
+                        <li>FREE Delivery</li>
+                        <li>24/7 support</li>
+                    </ul>
+                    <div class="buy-button">
+                        <h3 class="btn">Subscribe</h3>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h6 class="type">Premium</h6>
+                    <div class="price">$100</div>
+                    <h5 class="plan">Plan</h5>
+                    <ul class="details">
+                        <li>FREE Stickers</li>
+                        <li>FREE Delivery</li>
+                        <li>24/7 support</li>
+                    </ul>
+                    <div class="buy-button">
+                        <h3 class="btn">Book</h3>
+                    </div>
+                </div>
+            </section>
+
         </div>
+    </div>
+
+    <div id="successMessage" style="display: none;">
+        <!-- This div will display the success message after booking -->
+        Appointment successfully booked!
     </div>
 
     <script>
         // JavaScript function to handle the button click event
         function confirmAppointment(doctorId) {
+            // Display confirmation box
             if (confirm("Are you sure you want to book an appointment with this doctor?")) {
+                // If user confirms, send a request to the server to book the appointment
                 bookAppointment(doctorId);
             }
         }
 
+        // Function to send a request to book the appointment
         async function bookAppointment(doctorId) {
             try {
+                // Send a POST request to the server to book the appointment
                 const response = await fetch("/book-appointment", {
                     method: "POST",
                     headers: {
@@ -101,10 +200,14 @@
                     body: JSON.stringify({ doctorId })
                 });
 
+                // Check if the request was successful
                 if (response.ok) {
+                    // Display success message
                     alert("Appointment successfully booked!");
+                    // Reload the page to update the appointments list
                     location.reload();
                 } else {
+                    // Display error message
                     alert("Failed to book appointment. Please try again later.");
                 }
             } catch (error) {
