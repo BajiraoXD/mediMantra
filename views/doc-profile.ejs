@@ -15,33 +15,7 @@
         }
 
         .labels {
-            font-size: 11px;
-        }
-
-        .profile-img {
-            width: 100%;
-            max-width: 300px;
-            height: auto;
-        }
-
-        @media (max-width: 768px) {
-            .rounded-circle {
-                width: 120px;
-            }
-
-            h4 {
-                font-size: 1.2rem;
-            }
-
-            .text-center {
-                margin-bottom: 20px;
-            }
-        }
-
-        @media (max-width: 576px) {
-            h4 {
-                font-size: 1rem;
-            }
+            font-size: 11px
         }
     </style>
 </head>
@@ -53,9 +27,9 @@
                 <h1>Doctor's Profile</h1>
             </div>
 
-            <!-- Doctor's Information -->
-            <div class="col-md-6 col-sm-12 text-center p-3 py-5">
-                <img class="rounded-circle mt-5" width="150px" src="/images/male-doc.png"><br>
+            <div class="col-md-6 text-center p-3 py-5">
+                <img class="rounded-circle mt-5" width="150px" src="\images\male-doc.png"><br>
+                <br>
                 <br>
                 <h4 class="font-weight-bold">Name: <%= name %></h4>
                 <h4 class="font-weight-bold">Email: <%= email %></h4>
@@ -70,6 +44,8 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybihwIYH5F4G4U6o2FhwQ+Zm5r89O/yHG7F6v5d09y68Z9V5j" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-1Rzt1n8uE5XLgsAfZh1z5kwC2tZne0gESDLfO+g0W8uHlb/lPUQaL2XxUb6LssB0" crossorigin="anonymous"></script>
 </body>
 
 </html>

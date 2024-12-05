@@ -9,41 +9,61 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
         body {
-            background: rgb(99, 39, 120)
+            background: rgb(99, 39, 120);
         }
 
         .labels {
-            font-size: 11px
+            font-size: 11px;
+        }
+
+        .profile-img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+        }
+
+        @media (max-width: 768px) {
+            .rounded-circle {
+                width: 120px;
+            }
+
+            h4 {
+                font-size: 1.2rem;
+            }
+
+            .text-center {
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            h4 {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="container rounded bg-white mt-5 mb-5">
+    <div class="container rounded bg-white mt-5 mb-5 p-4">
         <div class="row">
-
-            <div class="col-md-12 text-center p-3 py-5">
-                <H1>User Profile</H1>
+            <div class="col-12 text-center p-3 py-5">
+                <h1>User Profile</h1>
             </div>
 
-            <div class="col-md-6 text-center p-3 py-5">
-                <img class="rounded-circle mt-5" width="150px" src="/images/user.jpg"><br>
-                <br>
-                <br>
-                <h4 class="font-weight-bold">Name: <%= name %>
-                </h4>
-                <h4 class="font-weight-bold">Email: <%= email %>
-                </h4>
-                <h4 class="font-weight-bold">Age:<%= age %>
-                </h4>
-
-            </div>
-            <div class="col-md-6 text-center p-3 py-5">
-                <img class="profile-img" src="/images/edit-pic.png" alt="">
+            <!-- User's Information -->
+            <div class="col-md-6 col-sm-12 text-center p-3 py-5">
+                <img class="rounded-circle mt-5" width="150px" src="/images/user.jpg"><br><br><br>
+                <h4 class="font-weight-bold">Name: <%= name %></h4>
+                <h4 class="font-weight-bold">Email: <%= email %></h4>
+                <h4 class="font-weight-bold">Age: <%= age %></h4>
             </div>
 
+            <!-- Editable Picture -->
+            <div class="col-md-6 col-sm-12 text-center p-3 py-5">
+                <img class="profile-img" src="/images/edit-pic.png" alt="Edit Profile Picture">
+            </div>
         </div>
-
     </div>
 </body>
 

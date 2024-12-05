@@ -8,182 +8,78 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
-
+    <!-- Add your CSS links here -->
     <style>
         body {
             background-color: #0ccf2d;
             font-family: "Ubuntu";
         }
 
-        .appointment-header {
-            margin: 20px 0;
-            text-align: center;
+        table {
+            border: white solid 2px;
+            margin-left: 38%;
+
+            float: left;
         }
 
-        .doctor-card {
-            margin: 15px;
-            padding: 20px;
-            border-radius: 1rem;
-            background-color: #fff;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            flex: 1 0 21%;
-        }
+        .gg {
+            border-radius: 100%;
+            background-color: blanchedalmond;
 
-        .doctor-img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
-
-        .price {
-            font-size: 1.5rem;
-            margin: 10px 0;
-        }
-
-        .btn {
-            background-color: #0ccf2d;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            opacity: 0.8;
-        }
-
-        @media (max-width: 768px) {
-            .doctor-card {
-                flex: 1 0 46%;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .doctor-card {
-                flex: 1 0 100%;
-            }
-        }
-
-        /* Confirmation Div Styling */
-        .confirmation-container {
-            display: none;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation: fadeInUp 0.5s ease-out;
-        }
-
-        .confirmation-message {
-            margin-top: 20px;
-            font-size: 18px;
-            color: #28a745;
-            font-weight: bold;
-        }
-
-        .checkmark-circle {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background-color: #28a745;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            animation: scaleIn 0.3s ease-out;
-        }
-
-        .checkmark {
-            width: 20px;
-            height: 40px;
-            border: solid white;
-            border-width: 0 5px 5px 0;
-            transform: rotate(45deg);
-            position: relative;
-            animation: drawCheckmark 0.3s ease-out;
-        }
-
-        @keyframes scaleIn {
-            0% {
-                transform: scale(0.5);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        @keyframes drawCheckmark {
-            0% {
-                height: 0;
-                width: 0;
-            }
-            100% {
-                height: 20px;
-                width: 40px;
-            }
-        }
-
-        @keyframes fadeInUp {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="gg col-md-12 text-center p-3 py-5">
-            <div class="appointment-header">
-                <h1>Get an Appointment!!!!</h1>
-            </div>
-            <h2>Available Doctors</h2>
+    <div>
 
-            <div class="row">
-                <% doctors.forEach(doctor => { %>
-                <div class="col-md-3">
-                    <div class="doctor-card">
-                        <img class="doctor-img" src="\images\male-doc.png" alt="app">
-                        <h5 style="color: #0ccf2d;">Dr. <%= doctor.name %></h5>
-                        <div class="price">Price: Rs. <%= Math.floor(Math.random() * (1000 - 500 + 1)) + 500 %></div>
-                        <button class="btn btn-outline-light btn-sm book-button"
-                            onclick="confirmAppointment('<%= doctor._id %>')">Book Appointment</button>
-                    </div>
-                </div>
-                <% }); %>
+        <div class="gg col-md-12 text-center p-3 py-5">
+            <div class="col-md-12 text-center p-3 py-5">
+                <H1>Get an Appointment!!!!</H1>
+            </div>
+            <h2>Available doctors</h2>
+
+            <img class="app-img" src="\images\doc-dashboard-blog.png" alt="app">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="2">Doctor Name</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <% doctors.forEach(doctor=> { %>
+                        <tr>
+                            <td style="color: #0ccf2d;">
+                                Dr. <%= doctor.name %>
+                            </td>
+                            <td>
+                                <button style="color: #0ccf2d;" class="btn btn-outline-light btn-sm book-button"
+                                    onclick="confirmAppointment('<%= doctor._id %>')">Book Appointment</button>
+                            </td>
+                        </tr>
+                        <% }); %>
+                </tbody>
+            </table>
+            <div class="col-md-12 text-center p-3 py-5">
+
             </div>
         </div>
     </div>
 
-    <!-- Confirmation Div (Initially Hidden) -->
-    <div class="confirmation-container" id="confirmationDiv">
-        <div class="checkmark-circle">
-            <div class="checkmark"></div>
-        </div>
-        <p class="confirmation-message">Appointment Confirmed!</p>
+
+
+    <div id="successMessage" style="display: none;">
+        <!-- This div will display the success message after booking -->
+        Appointment successfully booked!
     </div>
 
     <script>
-        // JavaScript function to handle the button click event
+        // Function to handle the button click event
         function confirmAppointment(doctorId) {
-            // Display confirmation box
             if (confirm("Are you sure you want to book an appointment with this doctor?")) {
-                // If user confirms, proceed with booking and show confirmation animation
+                // If user confirms, send a request to the server to book the appointment
                 bookAppointment(doctorId);
             }
         }
@@ -191,7 +87,6 @@
         // Function to send a request to book the appointment
         async function bookAppointment(doctorId) {
             try {
-                // Send a POST request to the server to book the appointment
                 const response = await fetch("/book-appointment", {
                     method: "POST",
                     headers: {
@@ -200,17 +95,12 @@
                     body: JSON.stringify({ doctorId })
                 });
 
-                // Check if the request was successful
                 if (response.ok) {
-                    // Show confirmation animation
-                    showConfirmationAnimation();
-
-                    // Optionally, reload the page or redirect after the confirmation animation is shown
-                    setTimeout(() => {
-                        location.reload(); // Reload after 3 seconds
-                    }, 3000);
+                    // Display success message
+                    alert("Appointment successfully booked!");
+                    // Reload the page to update the appointments list
+                    location.reload();
                 } else {
-                    // Display error message
                     alert("Failed to book appointment. Please try again later.");
                 }
             } catch (error) {
@@ -219,16 +109,7 @@
             }
         }
 
-        // Function to show confirmation animation
-        function showConfirmationAnimation() {
-            const confirmationDiv = document.getElementById('confirmationDiv');
-            confirmationDiv.style.display = 'flex'; // Show the confirmation div
 
-            // Optionally, hide the confirmation div after a few seconds
-            setTimeout(() => {
-                confirmationDiv.style.display = 'none'; // Hide the div after 3 seconds
-            }, 3000);
-        }
     </script>
 </body>
 
