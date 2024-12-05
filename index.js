@@ -57,6 +57,7 @@ const appointmentSchema = new mongoose.Schema({
         required: true
     }
 
+    // You can add more fields like timestamp, user details, etc., if needed
 });
 const fileSchema = new mongoose.Schema({
     filename: String,
@@ -229,7 +230,9 @@ app.post("/login", async (req, res) => {
         if (!passwordMatch) {
             return res.send("Incorrect password! Please try again.");
         }
-                                 
+        const record = await User.findOne({ email: email });
+        const userName = record['name'];
+        res.render("dashboard-user", { 'userName': userName, 'AppName': AppName });
     } catch (error) {
         console.error("Error during login:", error);
         res.send("An error occurred during login.");
@@ -346,7 +349,7 @@ app.post('/upload', upload.single('file'), async (req, res) => {
     const { filename, path } = req.file;
     const newFile = new File({ filename, path });
     await newFile.save();
-    alert("uploaded Successfully!!");
+    res.redirect('/user-report');
 });
 
 // Download endpoint
@@ -369,11 +372,6 @@ app.get('/doctor-report', async (req, res) => {
     const files = await File.find({});
     res.render('doctor-report.ejs', { files });
 });
-
-
-
-
-
 
 
 
