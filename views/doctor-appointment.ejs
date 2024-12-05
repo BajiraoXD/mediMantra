@@ -4,65 +4,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Appointment Page</title>
+    <title>Doctor Appointment Page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
-    <!-- Add your CSS links here -->
+
     <style>
         body {
-            background-color: #0ccf2d;
-            font-family: "Ubuntu";
+            background-color: rgb(7, 198, 202);
+            font-family: "Ubuntu", sans-serif;
         }
 
-        table {
-            border: white solid 5px;
-            margin-left: 45%;
-
-            float: left;
+        .container {
+            margin-top: 50px;
         }
 
-        .gg {
-
-            background-color: blanchedalmond;
-            width: 60%;
-            margin-top: 100px;
-            margin-left: 280px;
-
+        .card {
+            margin: 20px;
         }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .app-img {
+            height: 150px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .btn {
+            color: #0ccf2d;
+        }
+
+        .patient-card {
+            margin: 15px;
+            padding: 20px;
+            border-radius: 1rem;
+            background-color: #fff;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            flex: 1 0 21%;
+        }
+
+/* Confirmation Div Styling */
+.confirmation-container {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.confirmation-message {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #28a745;
+    font-weight: bold;
+}
+
+/* Checkmark Circle */
+.checkmark-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #28a745;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    animation: scaleIn 0.3s ease-out;
+}
+
+.checkmark {
+    width: 20px;
+    height: 40px;
+    border: solid white;
+    border-width: 0 5px 5px 0;
+    transform: rotate(45deg);
+    position: relative;
+    animation: drawCheckmark 0.3s ease-out;
+    display: block;
+}
+
+/* Animations */
+@keyframes scaleIn {
+    0% {
+        transform: scale(0.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes drawCheckmark {
+    0% {
+        height: 0;
+        width: 0;
+    }
+    100% {
+        height: 20px;
+        width: 40px;
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
     </style>
 </head>
 
 <body>
-    <div>
+    <div class="container">
+        <h1>You Got a Patient!</h1>
 
-        <div class="gg col-md-12 text-center p-3 py-5">
-            <div class="col-md-12 text-center p-3 py-5">
-                <H1>You got a patient.</H1>
-            </div>
-            <h2>Your patient</h2>
-
-            <img height="150px" class="app-img" src="\images\doctor.png" alt="app">
-
-            <table>
-
-                <tr>
-                    <td>Name:</td>
-                    <td>
-                        <% names.forEach(name=> { %>
-
-                            <%= name %>
-
-                                <% }); %>
-                    </td>
-
-                </tr>
-
-
-            </table>
-            <div class="col-md-12 text-center p-3 py-5">
-
+        <div class="card text-center">
+            <% names.forEach(name => { %>
+            <div class="col-md-3">
+                <div class="patient-card">
+                    <h5 class="card-title">Patient Name</h5>
+                    <img src="/images/doctor.png" alt="Doctor Image" class="app-img">
+                    <p class="card-text">You have an appointment with:</p>
+                    <p class="patient-name">
+                        <strong><%= name %></strong>
+                    </p>
+                    <button onclick="confirmAppointment()" class="btn">Confirm Appointment</button>
+                </div>
+                <% }); %>
             </div>
         </div>
-
     </div>
+
+    <!-- Confirmation Div (Initially Hidden) -->
+    <div class="confirmation-container" id="confirmationDiv">
+        <div class="checkmark-circle">
+            <div class="checkmark"></div>
+        </div>
+        <p class="confirmation-message">Appointment Confirmed!</p>
+    </div>
+
+    <script>
+        // JavaScript function to handle appointment confirmation
+        function confirmAppointment() {
+            const confirmationDiv = document.getElementById('confirmationDiv');
+            confirmationDiv.style.display = 'flex'; // Show the confirmation div
+
+            // Optionally, hide the confirmation div after a few seconds
+            setTimeout(() => {
+                confirmationDiv.style.display = 'none'; // Hide the div after 3 seconds
+            }, 3000);
+        }
+    </script>
+</body>
+
+</html>

@@ -11,41 +11,62 @@
     <script src="https://kit.fontawesome.com/64a450bfe1.js" crossorigin="anonymous"></script>
     <style>
         body {
-            background: rgb(7, 198, 202)
+            background: rgb(7, 198, 202);
         }
 
         .labels {
-            font-size: 11px
+            font-size: 11px;
+        }
+
+        .profile-img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+        }
+
+        @media (max-width: 768px) {
+            .rounded-circle {
+                width: 120px;
+            }
+
+            h4 {
+                font-size: 1.2rem;
+            }
+
+            .text-center {
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            h4 {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="container rounded bg-white mt-5 mb-5">
+    <div class="container rounded bg-white mt-5 mb-5 p-4">
         <div class="row">
-
-            <div class="col-md-12 text-center p-3 py-5">
-                <H1>Doctor's Profile</H1>
+            <div class="col-12 text-center p-3 py-5">
+                <h1>Doctor's Profile</h1>
             </div>
 
-            <div class="col-md-6 text-center p-3 py-5">
-                <img class="rounded-circle mt-5" width="150px" src="\images\male-doc.png"><br>
+            <!-- Doctor's Information -->
+            <div class="col-md-6 col-sm-12 text-center p-3 py-5">
+                <img class="rounded-circle mt-5" width="150px" src="/images/male-doc.png"><br>
                 <br>
-                <br>
-                <h4 class="font-weight-bold">Name: <%= name %>
-                </h4>
-                <h4 class="font-weight-bold">Email: <%= email %>
-                </h4>
-                <h4 class="font-weight-bold">Age:<%= age %>
-                </h4>
-                </h4>
-                <h4 class="font-weight-bold">ID:<%= doctorId %>
-                </h4>
-            </div>
-            <div class="col-md-6 text-center p-3 py-5">
-                <img class="profile-img" src="\images\doc-dashboard-blog.png" alt="profile">
+                <h4 class="font-weight-bold">Name: <%= name %></h4>
+                <h4 class="font-weight-bold">Email: <%= email %></h4>
+                <h4 class="font-weight-bold">Age: <%= age %></h4>
+                <h4 class="font-weight-bold">ID: <%= doctorId %></h4>
             </div>
 
+            <!-- Doctor's Profile Image -->
+            <div class="col-md-6 col-sm-12 text-center p-3 py-5">
+                <img class="profile-img" src="/images/gg-doc.png" alt="profile">
+            </div>
         </div>
     </div>
 
